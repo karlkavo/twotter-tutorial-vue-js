@@ -1,6 +1,10 @@
 <template>
  <div id="app"> 
    @{{ user.userName }} - {{ fullName }}
+   <strong>Followers:</strong> {{ followers }}
+   <button @click="followUser">
+     Follow
+     </button>
 
  </div>
   
@@ -25,12 +29,28 @@ export default {
       }
     },
   
-
+watch:{
+  followers(newFollowerCount, oldFollowerCount ){
+    if(oldFollowerCount < newFollowerCount){
+      console.log(`${this.user.userName} has gained a follower`)
+    }
+    }
+  },
   computed: {
     fullName() {
       return `${this.user.firstName} ${this.user.lastName}`;
       }
-    } 
+    } ,
+
+    methods: {
+      followUser(){
+        this.followers++
+        }
+        },
+
+        mounted() {
+          this.followUser();
+          }
     }
 
 </script>
@@ -40,8 +60,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
 }
 </style>
