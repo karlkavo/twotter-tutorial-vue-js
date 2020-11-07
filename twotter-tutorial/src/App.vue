@@ -1,6 +1,6 @@
 <template>
  <div id="app"> 
-   @{{ user.userName }}
+   @{{ user.userName }} - {{ fullName }}
 
  </div>
   
@@ -28,9 +28,9 @@ export default {
 
   computed: {
     fullName() {
-      return `${this.user.firstName}`
+      return `${this.user.firstName} ${this.user.lastName}`;
       }
-    }
+    } 
     }
 
 </script>
